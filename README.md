@@ -1,39 +1,39 @@
 <div align="center">
   <img src="./docs/images/logo.png" alt="VideoCaptioner Logo" width="100">
   <h1>VideoCaptioner</h1>
-  <p>基于大语言模型的视频字幕处理工具 — 语音识别、字幕优化、翻译、视频合成一站式处理</p>
+  <p>An LLM-powered video subtitle toolkit for speech recognition, subtitle optimization, translation, and video composition</p>
 
-  [在线文档](https://weifeng2333.github.io/VideoCaptioner/) · [CLI 使用](#cli-命令行) · [GUI 桌面版](#gui-桌面版) · [Claude Code Skill](#claude-code-skill)
+  [Online Documentation](https://weifeng2333.github.io/VideoCaptioner/) · [CLI Usage](#cli-command-line) · [Desktop GUI](#desktop-gui) · [Claude Code Skill](#claude-code-skill)
 </div>
 
-## 安装
+## Installation
 
 ```bash
-pip install videocaptioner          # 安装 CLI + GUI 桌面版
+pip install videocaptioner          # Install the CLI and desktop GUI
 ```
 
-免费功能（必剪语音识别、必应/谷歌翻译）**无需任何配置，安装即用**。
+Free features (Bijian speech recognition and Bing/Google translation) **work immediately after installation, with no configuration required**.
 
-## CLI 命令行
+## CLI Command Line
 
 ```bash
-# 语音转录（免费，无需 API Key）
+# Speech transcription (free, no API key required)
 videocaptioner transcribe video.mp4 --asr bijian
 
-# 字幕翻译（免费必应翻译）
+# Subtitle translation (free Bing translation)
 videocaptioner subtitle input.srt --translator bing --target-language en
 
-# 全流程：转录 → 优化 → 翻译 → 合成
+# Full pipeline: transcribe → optimize → translate → compose
 videocaptioner process video.mp4 --target-language ja
 
-# 字幕烧录到视频
+# Embed subtitles in a video
 videocaptioner synthesize video.mp4 -s subtitle.srt
 
-# 下载在线视频
+# Download online videos
 videocaptioner download "https://youtube.com/watch?v=xxx"
 ```
 
-需要 LLM 功能（字幕优化、大模型翻译）时，配置 API Key：
+To use LLM features (subtitle optimization and LLM translation), configure an API key:
 
 ```bash
 videocaptioner config set llm.api_key <your-key>
@@ -41,41 +41,41 @@ videocaptioner config set llm.api_base https://api.openai.com/v1
 videocaptioner config set llm.model gpt-4o-mini
 ```
 
-配置优先级：`命令行参数 > 环境变量 (VIDEOCAPTIONER_*) > 配置文件 > 默认值`。运行 `videocaptioner config show` 查看当前配置。
+Configuration precedence: `command-line arguments > environment variables (VIDEOCAPTIONER_*) > configuration file > defaults`. Run `videocaptioner config show` to view the current configuration.
 
 <details>
-<summary>所有 CLI 命令一览</summary>
+<summary>All CLI Commands</summary>
 
-| 命令 | 说明 |
+| Command | Description |
 |------|------|
-| `gui` | 打开桌面版。也可以直接运行 `videocaptioner-gui` |
-| `transcribe` | 语音转字幕。引擎：`faster-whisper`、`whisper-api`、`bijian`（免费）、`jianying`（免费）、`whisper-cpp` |
-| `subtitle` | 字幕优化/翻译。翻译服务：`llm`、`bing`（免费）、`google`（免费） |
-| `dub` | 根据字幕生成配音音轨或配音视频 |
-| `synthesize` | 字幕烧录到视频（软字幕/硬字幕） |
-| `process` | 全流程处理 |
-| `download` | 下载 YouTube、B站等平台视频 |
-| `config` | 配置管理（`show`、`set`、`get`、`path`、`init`） |
+| `gui` | Open the desktop GUI. You can also run `videocaptioner-gui` |
+| `transcribe` | Transcribe speech to subtitles. Engines: `faster-whisper`, `whisper-api`, `bijian` (free), `jianying` (free), `whisper-cpp` |
+| `subtitle` | Optimize/translate subtitles. Translation services: `llm`, `bing` (free), `google` (free) |
+| `dub` | Generate a dubbed audio track or video from subtitles |
+| `synthesize` | Embed subtitles in a video (soft or hard subtitles) |
+| `process` | Run the full pipeline |
+| `download` | Download videos from YouTube, Bilibili, and other platforms |
+| `config` | Manage configuration (`show`, `set`, `get`, `path`, `init`) |
 
-运行 `videocaptioner <命令> --help` 查看完整参数。完整 CLI 文档见 [docs/cli.md](docs/cli.md)。
+Run `videocaptioner <command> --help` for all options. See the full CLI documentation in [docs/cli.md](docs/cli.md).
 
 </details>
 
-## GUI 桌面版
+## Desktop GUI
 
 ```bash
 pip install videocaptioner
-videocaptioner-gui                  # 显式打开桌面版
-videocaptioner gui                  # 等价命令
-videocaptioner                      # 无参数时也会打开桌面版
+videocaptioner-gui                  # Explicitly open the desktop GUI
+videocaptioner gui                  # Equivalent command
+videocaptioner                      # Also opens the desktop GUI when run without arguments
 ```
 
 <details>
-<summary>其他安装方式：Windows 安装包 / macOS 一键脚本</summary>
+<summary>Other Installation Options: Windows Installer / macOS One-Step Script</summary>
 
-**Windows**：从 [Release](https://github.com/WEIFENG2333/VideoCaptioner/releases) 下载安装包
+**Windows**: Download the installer from [Release](https://github.com/WEIFENG2333/VideoCaptioner/releases)
 
-**macOS**：
+**macOS**:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/WEIFENG2333/VideoCaptioner/master/scripts/run.sh | bash
 ```
@@ -84,62 +84,62 @@ curl -fsSL https://raw.githubusercontent.com/WEIFENG2333/VideoCaptioner/master/s
 
 
 <!-- <div align="center">
-  <img src="https://h1.appinn.me/file/1731487405884_main.png" alt="界面预览" width="90%" style="border-radius: 5px;">
+  <img src="https://h1.appinn.me/file/1731487405884_main.png" alt="Interface preview" width="90%" style="border-radius: 5px;">
 </div> -->
 
-![页面预览](https://h1.appinn.me/file/1731487410170_preview1.png)
-![页面预览](https://h1.appinn.me/file/1731487410832_preview2.png)
+![Interface preview](https://h1.appinn.me/file/1731487410170_preview1.png)
+![Interface preview](https://h1.appinn.me/file/1731487410832_preview2.png)
 
-## LLM API 配置
+## LLM API Configuration
 
-LLM 仅用于字幕优化和大模型翻译，免费功能（必剪识别、必应翻译）无需配置。
+LLMs are used only for subtitle optimization and LLM translation. Free features (Bijian recognition and Bing translation) require no configuration.
 
-支持所有 OpenAI 兼容接口的服务商：
+All providers with OpenAI-compatible APIs are supported:
 
-| 服务商 | 官网 |
+| Provider | Website |
 |--------|------|
-| **VideoCaptioner 中转站** | [api.videocaptioner.cn](https://api.videocaptioner.cn) — 高并发，性价比高，支持 GPT/Claude/Gemini 等 |
+| **VideoCaptioner API Gateway** | [api.videocaptioner.cn](https://api.videocaptioner.cn) — High concurrency and cost-effective access to GPT, Claude, Gemini, and more |
 | SiliconCloud | [cloud.siliconflow.cn](https://cloud.siliconflow.cn/i/HF95kaoz) |
 | DeepSeek | [platform.deepseek.com](https://platform.deepseek.com) |
 
-在软件设置或 CLI 中填入 API Base URL 和 API Key 即可。[详细配置教程](https://weifeng2333.github.io/VideoCaptioner/config/llm)
+Enter the API Base URL and API key in the application settings or CLI. [Detailed Configuration Guide](https://weifeng2333.github.io/VideoCaptioner/config/llm)
 
 ## Claude Code Skill
 
-本项目提供了 [Claude Code Skill](https://code.claude.com/docs/en/skills.md)，让 AI 编程助手可以直接调用 VideoCaptioner 处理视频。
+This project provides a [Claude Code Skill](https://code.claude.com/docs/en/skills.md) that lets AI coding assistants use VideoCaptioner directly to process videos.
 
-安装到 Claude Code：
+Install it in Claude Code:
 
 ```bash
 mkdir -p ~/.claude/skills/videocaptioner
 cp skills/SKILL.md ~/.claude/skills/videocaptioner/SKILL.md
 ```
 
-然后在 Claude Code 中输入 `/videocaptioner transcribe video.mp4 --asr bijian` 即可使用。
+Then enter `/videocaptioner transcribe video.mp4 --asr bijian` in Claude Code to use it.
 
-## 工作原理
+## How It Works
 
 ```
-音视频输入 → 语音识别 → 字幕断句 → LLM 优化 → 翻译 → 视频合成
+Audio/video input → speech recognition → subtitle segmentation → LLM optimization → translation → video composition
 ```
 
-- 词级时间戳 + VAD 语音活动检测，识别准确率高
-- LLM 语义理解断句，字幕阅读体验自然流畅
-- 上下文感知翻译，支持反思优化机制
-- 批量并发处理，效率高
+- Word-level timestamps and voice activity detection (VAD) for accurate recognition
+- LLM-based semantic segmentation for naturally readable subtitles
+- Context-aware translation with reflection-based refinement
+- Concurrent batch processing for higher efficiency
 
-## 开发
+## Development
 
 ```bash
 git clone https://github.com/WEIFENG2333/VideoCaptioner.git
 cd VideoCaptioner
-uv sync && uv run videocaptioner     # 运行 GUI
-uv run videocaptioner --help          # 运行 CLI
-uv run pyright                        # 类型检查
-uv run pytest tests/test_cli/ -q      # 运行测试
+uv sync && uv run videocaptioner     # Run the GUI
+uv run videocaptioner --help          # Run the CLI
+uv run pyright                        # Type check
+uv run pytest tests/test_cli/ -q      # Run tests
 ```
 
-## 许可证
+## License
 
 [GPL-3.0](LICENSE)
 

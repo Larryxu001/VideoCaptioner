@@ -1,73 +1,73 @@
-# 测试套件
+# Test Suite
 
-VideoCaptioner 翻译模块的集成测试。
+Integration tests for the VideoCaptioner translation module.
 
-## 📁 测试文件
+## 📁 Test Files
 
 ```
 tests/test_translate/
-├── test_google_translator.py   # Google 翻译器（免费 API）
-├── test_bing_translator.py     # Bing 翻译器（免费 API）
-├── test_llm_translator.py      # LLM 翻译器（需要 API 密钥）
-└── test_deeplx_translator.py   # DeepLX 翻译器（可选）
+├── test_google_translator.py   # Google translator (free API)
+├── test_bing_translator.py     # Bing translator (free API)
+├── test_llm_translator.py      # LLM translator (API key required)
+└── test_deeplx_translator.py   # DeepLX translator (optional)
 ```
 
-## 🚀 运行测试
+## 🚀 Running Tests
 
-### 快速测试（免费 API）
+### Quick Tests (Free APIs)
 
 ```bash
-# Google + Bing 翻译器（无需配置）
+# Google + Bing translators (no configuration required)
 uv run pytest tests/test_translate/test_google_translator.py tests/test_translate/test_bing_translator.py -v
 ```
 
-### 完整测试（需要 API 密钥）
+### Full Tests (API Key Required)
 
 ```bash
-# 1. 配置环境变量
+# 1. Configure environment variables
 export OPENAI_BASE_URL=https://api.openai.com/v1
 export OPENAI_API_KEY=sk-your-key
 
-# 2. 运行所有测试
+# 2. Run all tests
 uv run pytest tests/test_translate/ -v
 ```
 
-### 运行特定测试
+### Run Specific Tests
 
 ```bash
-# 只运行 Google 翻译器
+# Run only the Google translator
 uv run pytest tests/test_translate/test_google_translator.py::TestGoogleTranslator::test_translate_simple_text -v
 
-# 跳过需要 API 的测试
+# Skip tests that require an API
 uv run pytest tests/test_translate/ -m "not integration" -v
 ```
 
-## ⚙️ 环境变量
+## ⚙️ Environment Variables
 
-### 本地开发
+### Local Development
 
-创建 `.env` 文件（已在 .gitignore 中）：
+Create a `.env` file (already covered by .gitignore):
 
 ```bash
-# LLM 翻译器测试（必需）
+# LLM translator tests (required)
 OPENAI_BASE_URL=https://api.openai.com/v1
 OPENAI_API_KEY=sk-your-api-key
 
-# DeepLX 翻译器测试（可选）
+# DeepLX translator tests (optional)
 DEEPLX_ENDPOINT=https://api.deeplx.org/translate
 ```
 
 ### CI/CD
 
-GitHub Actions 中通过 **Settings → Secrets** 配置：
+Configure these in GitHub Actions under **Settings → Secrets**:
 
 - `OPENAI_BASE_URL`
 - `OPENAI_API_KEY`
-- `DEEPLX_ENDPOINT`（可选）
+- `DEEPLX_ENDPOINT` (optional)
 
-详见 [docs/CI_SETUP.md](../docs/CI_SETUP.md)
+See [docs/CI_SETUP.md](../docs/CI_SETUP.md)
 
-## 📊 测试结果示例
+## 📊 Example Test Results
 
 ```
 =================== 6 passed, 6 skipped ===================
@@ -78,13 +78,13 @@ GitHub Actions 中通过 **Settings → Secrets** 配置：
 ⏭️ test_deeplx_translator.py    2 skipped (no endpoint)
 ```
 
-## 🐛 常见问题
+## 🐛 Troubleshooting
 
-### 测试被跳过
+### Tests Are Skipped
 
-**原因**: 缺少环境变量
+**Cause**: Missing environment variables
 
-**解决**:
+**Solution**:
 
 ```bash
 export OPENAI_BASE_URL=...
@@ -93,25 +93,25 @@ export OPENAI_API_KEY=...
 
 ### ImportError
 
-**原因**: 缺少依赖
+**Cause**: Missing dependencies
 
-**解决**:
+**Solution**:
 
 ```bash
 uv sync --all-extras
 ```
 
-### 翻译测试失败
+### Translation Tests Fail
 
-**原因**: 免费 API 可能不稳定或有频率限制
+**Cause**: Free APIs may be unstable or rate-limited
 
-**解决**:
+**Solution**:
 
-- Google/Bing 测试失败是正常的（免费服务）
-- 等待几分钟后重试
-- 只运行 LLM 测试（更稳定）
+- Google/Bing test failures can occur with these free services
+- Wait a few minutes and retry
+- Run only the LLM tests for more stable results
 
-## 📝 添加新测试
+## 📝 Adding New Tests
 
 ```python
 # tests/test_translate/test_my_translator.py
@@ -133,10 +133,10 @@ class TestMyTranslator:
         result = translator.translate_subtitle(sample_asr_data)
         assert len(result.segments) == len(sample_asr_data.segments)
         for seg in result.segments:
-            assert seg.translated_text  # 确保有翻译结果
+            assert seg.translated_text  # Ensure a translation is present
 ```
 
-## 🔗 相关文档
+## 🔗 Related Documentation
 
-- [CI/CD 配置](../docs/CI_SETUP.md)
-- [测试指南](../docs/TESTING.md)
+- [CI/CD Configuration](../docs/CI_SETUP.md)
+- [Testing Guide](../docs/TESTING.md)
